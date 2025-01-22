@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_26ff305c7a9c7f4b5ba486b5021d298d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_26ff305c7a9c7f4b5ba486b5021d298d" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_26ff305c7a9c7f4b5ba486b5021d298d = L.map(
+                "map_26ff305c7a9c7f4b5ba486b5021d298d",
+                {
+                    center: [0.5071, 101.4478],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_beaa6622ba0b1d6c63d883a6a9ff6329 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_beaa6622ba0b1d6c63d883a6a9ff6329.addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+            var marker_642a3e9ccb2a3611a99dff5db891d7ee = L.marker(
+                [0.535616948748213, 101.4408593952205],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_fcf3eb80db82e2af787b8012ac3972f1 = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_642a3e9ccb2a3611a99dff5db891d7ee.setIcon(custom_icon_fcf3eb80db82e2af787b8012ac3972f1);
+        
+    
+        var popup_500936113a46b3f160367e82b2f0277f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7acf2017f634e314088f94e7157e3e85 = $(`<div id="html_7acf2017f634e314088f94e7157e3e85" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/E:/Folderr/Comp-vision/SIG/images/Bank BCA A. Yani.png"                           width="200"><br>             <b>ATM Bank BCA A. Yani</b><br>             <p>             Lokasi: Jl. Jend. Ahmad Yani No.41 C, Kota Baru, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28113<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>         </div></div>`)[0];
+                popup_500936113a46b3f160367e82b2f0277f.setContent(html_7acf2017f634e314088f94e7157e3e85);
+            
+        
+
+        marker_642a3e9ccb2a3611a99dff5db891d7ee.bindPopup(popup_500936113a46b3f160367e82b2f0277f)
+        ;
+
+        
+    
+    
+            marker_642a3e9ccb2a3611a99dff5db891d7ee.bindTooltip(
+                `<div>
+                     ATM Bank BCA A. Yani, Pekanbaru
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_bc045455f7923f16f1d9c0865e7a463a = L.marker(
+                [0.5298348953911128, 101.44714816749696],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_4b7b492f732543dbe2902258e6a25d2a = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_bc045455f7923f16f1d9c0865e7a463a.setIcon(custom_icon_4b7b492f732543dbe2902258e6a25d2a);
+        
+    
+        var popup_d0fb1d0c57095e03bd5e5473ad160c26 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_74354d2880fb4b2ba174619cfd7cc099 = $(`<div id="html_74354d2880fb4b2ba174619cfd7cc099" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/ATM Bank BCA 4266 Plaza Sukaramai.png"                           width="200"><br>             <b>ATM Bank BCA 4266 Plaza Sukaramai</b><br>             <p>             Lokasi: Jl. Jend. Sudirman, Sukaramai, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28111<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>         </div></div>`)[0];
+                popup_d0fb1d0c57095e03bd5e5473ad160c26.setContent(html_74354d2880fb4b2ba174619cfd7cc099);
+            
+        
+
+        marker_bc045455f7923f16f1d9c0865e7a463a.bindPopup(popup_d0fb1d0c57095e03bd5e5473ad160c26)
+        ;
+
+        
+    
+    
+            marker_bc045455f7923f16f1d9c0865e7a463a.bindTooltip(
+                `<div>
+                     ATM Bank BCA 4266 Plaza Sukaramai
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_64ae3167d3dddeeb592fb01cba780690 = L.marker(
+                [0.5304492237446169, 101.41977976564556],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_723291945fd8d416fbc3bc15d434a9be = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_64ae3167d3dddeeb592fb01cba780690.setIcon(custom_icon_723291945fd8d416fbc3bc15d434a9be);
+        
+    
+        var popup_46a474a64da247876949cc3b557db7f4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ece67197931b3dfa60c06552d984c44c = $(`<div id="html_ece67197931b3dfa60c06552d984c44c" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/ATM BCA Wira Kencana.jpg"                           width="200"><br>             <b>ATM BCA Wira Kencana</b><br>             <p>             Lokasi: Jl. Soekarno - Hatta No.56, Labuh Baru Tim., Kec. Payung Sekaki, Kota Pekanbaru, Riau 28291<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>         </div></div>`)[0];
+                popup_46a474a64da247876949cc3b557db7f4.setContent(html_ece67197931b3dfa60c06552d984c44c);
+            
+        
+
+        marker_64ae3167d3dddeeb592fb01cba780690.bindPopup(popup_46a474a64da247876949cc3b557db7f4)
+        ;
+
+        
+    
+    
+            marker_64ae3167d3dddeeb592fb01cba780690.bindTooltip(
+                `<div>
+                     ATM BCA Wira Kencana
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_5b0366f6ae3858a56faaa4b25fea770a = L.marker(
+                [0.4985930249548644, 101.45487352146594],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_566362cc4f4f22cea0aa5407f15f306b = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_5b0366f6ae3858a56faaa4b25fea770a.setIcon(custom_icon_566362cc4f4f22cea0aa5407f15f306b);
+        
+    
+        var popup_f72d6686f0a204befbc941dca1d6ed6c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c8a8f4e349da8472fb697457702ab000 = $(`<div id="html_c8a8f4e349da8472fb697457702ab000" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/ATM Bank BCA 2907-RSIA Syafira.png"                           width="200"><br>             <b>ATM Bank BCA 2907-RSIA Syafira</b><br>             <p>             Lokasi: Jl. Jend. Sudirman, Tengkerang Tengah, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28115<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>         </div></div>`)[0];
+                popup_f72d6686f0a204befbc941dca1d6ed6c.setContent(html_c8a8f4e349da8472fb697457702ab000);
+            
+        
+
+        marker_5b0366f6ae3858a56faaa4b25fea770a.bindPopup(popup_f72d6686f0a204befbc941dca1d6ed6c)
+        ;
+
+        
+    
+    
+            marker_5b0366f6ae3858a56faaa4b25fea770a.bindTooltip(
+                `<div>
+                     ATM Bank BCA 2907-RSIA Syafira
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_8564a872920261732d56a7eb9d752279 = L.marker(
+                [0.5324745669193345, 101.44814685215336],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_55c68903fa6b7a00d50312208af60434 = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_8564a872920261732d56a7eb9d752279.setIcon(custom_icon_55c68903fa6b7a00d50312208af60434);
+        
+    
+        var popup_a68e5ff43ba2c3fdc9e9ecfd2e64c50a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4294a1ea1b3899f303a8751797d7ef73 = $(`<div id="html_4294a1ea1b3899f303a8751797d7ef73" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/ATM Bank BCA 6544-Senapelan.png"                           width="200"><br>             <b>ATM Bank BCA 6544-Senapelan</b><br>             <p>             Lokasi: Lobby Senapelan Plaza, Jl. Jend. Sudirman No. 121, Rintis, Kec. Lima Puluh, Kota Pekanbaru, Riau 28111<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>         </div></div>`)[0];
+                popup_a68e5ff43ba2c3fdc9e9ecfd2e64c50a.setContent(html_4294a1ea1b3899f303a8751797d7ef73);
+            
+        
+
+        marker_8564a872920261732d56a7eb9d752279.bindPopup(popup_a68e5ff43ba2c3fdc9e9ecfd2e64c50a)
+        ;
+
+        
+    
+    
+            marker_8564a872920261732d56a7eb9d752279.bindTooltip(
+                `<div>
+                     ATM Bank BCA 6544-Senapelan
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9dda9c2ca3c4ae54fc388c795e1e250f = L.marker(
+                [0.536026381691666, 101.44551671167665],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_e8993eeaa3bcca64746aa8cbdbc80e76 = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_9dda9c2ca3c4ae54fc388c795e1e250f.setIcon(custom_icon_e8993eeaa3bcca64746aa8cbdbc80e76);
+        
+    
+        var popup_ae937ee1db7bd5466b9d6c37038453ef = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cfbb0f119acef1127ad7a981330ce955 = $(`<div id="html_cfbb0f119acef1127ad7a981330ce955" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/BRI Unit Juanda.jpg"                           width="200"><br>             <b>BRI Unit Juanda</b><br>             <p>             Lokasi: Jl. Ir. H. Juanda No.81-83, Sago, Kec. Senapelan, Kota Pekanbaru, Riau 28155<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>         </div></div>`)[0];
+                popup_ae937ee1db7bd5466b9d6c37038453ef.setContent(html_cfbb0f119acef1127ad7a981330ce955);
+            
+        
+
+        marker_9dda9c2ca3c4ae54fc388c795e1e250f.bindPopup(popup_ae937ee1db7bd5466b9d6c37038453ef)
+        ;
+
+        
+    
+    
+            marker_9dda9c2ca3c4ae54fc388c795e1e250f.bindTooltip(
+                `<div>
+                     BRI Unit Juanda
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_fe058f2ae18042c4c037fd5fa548e3b4 = L.marker(
+                [0.5266026764023216, 101.44723811101905],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_5e49528ae38a0fb5d41c8091790e35e1 = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_fe058f2ae18042c4c037fd5fa548e3b4.setIcon(custom_icon_5e49528ae38a0fb5d41c8091790e35e1);
+        
+    
+        var popup_bdd1413ea30cc58d649ed8fb5cbf20aa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_88da05f09377b1fcf94ebb1b6166eca1 = $(`<div id="html_88da05f09377b1fcf94ebb1b6166eca1" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/bri unit sudirman.jpg"                           width="200"><br>             <b>Bank BRI Unit Sudirman</b><br>             <p>             Lokasi: Jl. Jend. Sudirman, Sukaramai, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28156<br>             Buka jam 08.00–16.00<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>         </div></div>`)[0];
+                popup_bdd1413ea30cc58d649ed8fb5cbf20aa.setContent(html_88da05f09377b1fcf94ebb1b6166eca1);
+            
+        
+
+        marker_fe058f2ae18042c4c037fd5fa548e3b4.bindPopup(popup_bdd1413ea30cc58d649ed8fb5cbf20aa)
+        ;
+
+        
+    
+    
+            marker_fe058f2ae18042c4c037fd5fa548e3b4.bindTooltip(
+                `<div>
+                     Bank BRI Unit Sudirman
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_be4ef5c642eb33da91f627014a1be6ea = L.marker(
+                [0.5285256, 101.4390289],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_57d6371172be19cc668096b76519c6e6 = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_be4ef5c642eb33da91f627014a1be6ea.setIcon(custom_icon_57d6371172be19cc668096b76519c6e6);
+        
+    
+        var popup_d39149efab0d68e3dabb2d92e154a0bc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3fe7bee2dc3177ed346a3b3a8b05592d = $(`<div id="html_3fe7bee2dc3177ed346a3b3a8b05592d" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/Bank BRI Unit Pasar Kodim.png"                           width="200"><br>             <b>Bank BRI Unit Pasar Kodim</b><br>             <p>             Lokasi: Jl. Cempaka No.88 A, RT.002/RW.002, Padang Bulan, Kec. Senapelan, Kota Pekanbaru, Riau 28281<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>         </div></div>`)[0];
+                popup_d39149efab0d68e3dabb2d92e154a0bc.setContent(html_3fe7bee2dc3177ed346a3b3a8b05592d);
+            
+        
+
+        marker_be4ef5c642eb33da91f627014a1be6ea.bindPopup(popup_d39149efab0d68e3dabb2d92e154a0bc)
+        ;
+
+        
+    
+    
+            marker_be4ef5c642eb33da91f627014a1be6ea.bindTooltip(
+                `<div>
+                     Bank BRI Unit Pasar Kodim
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_50dd472f258c9a108fe701e2a2183fe9 = L.marker(
+                [0.5172272, 101.4178318],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_f8d9de94c17e728256fb51d0164038ca = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_50dd472f258c9a108fe701e2a2183fe9.setIcon(custom_icon_f8d9de94c17e728256fb51d0164038ca);
+        
+    
+        var popup_78620c6b0f51cdf73c00054511500a98 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a02d96246be2897ff0e07aed6a079113 = $(`<div id="html_a02d96246be2897ff0e07aed6a079113" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/Bank BRI UNIT Sigunggung.jpg"                           width="200"><br>             <b>Bank BRI UNIT Sigunggung</b><br>             <p>             Lokasi: Jl. Dharma Bakti No.4, Labuh Baru Bar., Kec. Payung Sekaki, Kota Pekanbaru, Riau 28292<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>         </div></div>`)[0];
+                popup_78620c6b0f51cdf73c00054511500a98.setContent(html_a02d96246be2897ff0e07aed6a079113);
+            
+        
+
+        marker_50dd472f258c9a108fe701e2a2183fe9.bindPopup(popup_78620c6b0f51cdf73c00054511500a98)
+        ;
+
+        
+    
+    
+            marker_50dd472f258c9a108fe701e2a2183fe9.bindTooltip(
+                `<div>
+                     Bank BRI UNIT Sigunggung
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f9288611529dc4dc0534138faab341cd = L.marker(
+                [0.5231103672517159, 101.44223053866102],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_f90ac1123b60da92f845aa44993b655a = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_f9288611529dc4dc0534138faab341cd.setIcon(custom_icon_f90ac1123b60da92f845aa44993b655a);
+        
+    
+        var popup_1b22879a389f76dc00e686dd5a833af0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_af6c1e0a177cbbc4ec400ee90089a97c = $(`<div id="html_af6c1e0a177cbbc4ec400ee90089a97c" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/Bank bri kcp ayani.jpg"                           width="200"><br>             <b>Bank BRI KCP Ahmad Yani</b><br>             <p>             Lokasi: Jl. Jend. Ahmad Yani, Tanah Datar, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28293<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>         </div></div>`)[0];
+                popup_1b22879a389f76dc00e686dd5a833af0.setContent(html_af6c1e0a177cbbc4ec400ee90089a97c);
+            
+        
+
+        marker_f9288611529dc4dc0534138faab341cd.bindPopup(popup_1b22879a389f76dc00e686dd5a833af0)
+        ;
+
+        
+    
+    
+            marker_f9288611529dc4dc0534138faab341cd.bindTooltip(
+                `<div>
+                     Bank BRI KCP Ahmad Yani
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_4b86e2fb17c8dcfaade790f493feae6d = L.marker(
+                [0.4676157, 101.4044837],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_3d9ede7ca35d303679edeea653d04c50 = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_4b86e2fb17c8dcfaade790f493feae6d.setIcon(custom_icon_3d9ede7ca35d303679edeea653d04c50);
+        
+    
+        var popup_cb3407c3e6de721ee7a4c4861780b035 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_40dd95c3af7f5fec97150a72a645bfef = $(`<div id="html_40dd95c3af7f5fec97150a72a645bfef" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/atm bri delima.png"                           width="200"><br>             <b>	ATM BRI & BCA Alfamart</b><br>             <p>             Lokasi: Jl. Delima, RT.01/RW.02, Tampan, Kec. Tampan, Kota Pekanbaru, Riau 28292<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a><br>             <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>         </div></div>`)[0];
+                popup_cb3407c3e6de721ee7a4c4861780b035.setContent(html_40dd95c3af7f5fec97150a72a645bfef);
+            
+        
+
+        marker_4b86e2fb17c8dcfaade790f493feae6d.bindPopup(popup_cb3407c3e6de721ee7a4c4861780b035)
+        ;
+
+        
+    
+    
+            marker_4b86e2fb17c8dcfaade790f493feae6d.bindTooltip(
+                `<div>
+                     Bank BRI & BCA Delima
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_179a02f5f4f62034d8314a7c8ddd5d4b = L.marker(
+                [0.48172199314575, 101.41846972997268],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_d3f5dc1867c3ccc39de945b4f4fea2a9 = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_179a02f5f4f62034d8314a7c8ddd5d4b.setIcon(custom_icon_d3f5dc1867c3ccc39de945b4f4fea2a9);
+        
+    
+        var popup_2515a3376ba3c31d54bfadfd2641010d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_61fba2c53815753e1917352e05768071 = $(`<div id="html_61fba2c53815753e1917352e05768071" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/atm bri Soekarno-Hatta.png"                           width="200"><br>             <b>BRI - Unit Kota Bertuah</b><br>             <p>             Lokasi: Jl. Soekarno - Hatta No.174, Delima, Kec. Tampan, Kota Pekanbaru, Riau 28292<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>         </div></div>`)[0];
+                popup_2515a3376ba3c31d54bfadfd2641010d.setContent(html_61fba2c53815753e1917352e05768071);
+            
+        
+
+        marker_179a02f5f4f62034d8314a7c8ddd5d4b.bindPopup(popup_2515a3376ba3c31d54bfadfd2641010d)
+        ;
+
+        
+    
+    
+            marker_179a02f5f4f62034d8314a7c8ddd5d4b.bindTooltip(
+                `<div>
+                     Bank BRI Soekarno-Hatta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_58f6863744648d7257648f4323b8c2e0 = L.marker(
+                [0.4805712482152978, 101.41874971526678],
+                {
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+        
+    
+        var custom_icon_c755f594363b5c65488dd1c369d2311e = L.icon({
+  "iconUrl": "data:image/png;base64,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",
+  "iconSize": [34, 34],
+});
+        marker_58f6863744648d7257648f4323b8c2e0.setIcon(custom_icon_c755f594363b5c65488dd1c369d2311e);
+        
+    
+        var popup_242e3ca97c182a71c4dbefae083b7511 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b96f58bbc6d2b8b9e5e8bce45358224f = $(`<div id="html_b96f58bbc6d2b8b9e5e8bce45358224f" style="width: 100.0%; height: 100.0%;"><div style="font-family: Arial; font-size: 12px; line-height: 1.5;">             <img src="E:/Folderr/Comp-vision/SIG/images/ATM bri indomaret fresh.png"                           width="200"><br>             <b>Indomaret Plus Sukarno Hatta</b><br>             <p>             Lokasi: Jl. Sukarno Hatta No. 1 A-D, Sidomulyo Timur, Marpoyan Damai, Pekanbaru City, Riau 28282<br>             Buka 24 jam<br>             Layanan: <br>             - Penarikan Tunai<br>             - Transfer Antar Rekening<br>             - Informasi Saldo             </p>             <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>         </div></div>`)[0];
+                popup_242e3ca97c182a71c4dbefae083b7511.setContent(html_b96f58bbc6d2b8b9e5e8bce45358224f);
+            
+        
+
+        marker_58f6863744648d7257648f4323b8c2e0.bindPopup(popup_242e3ca97c182a71c4dbefae083b7511)
+        ;
+
+        
+    
+    
+            marker_58f6863744648d7257648f4323b8c2e0.bindTooltip(
+                `<div>
+                     ATM BRI Indomaret Fresh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_75857fadca6718c6e082a948624a0813_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_beaa6622ba0b1d6c63d883a6a9ff6329,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_75857fadca6718c6e082a948624a0813 = L.control.layers(
+                layer_control_75857fadca6718c6e082a948624a0813_layers.base_layers,
+                layer_control_75857fadca6718c6e082a948624a0813_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_26ff305c7a9c7f4b5ba486b5021d298d);
+
+        
+</script>
+</html>
