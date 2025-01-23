@@ -488,6 +488,72 @@ lokasi_atm_list = [
         # "icon_color": "green",
         # "icon_text_color": "white",
     },
+    {
+        "lokasi": [0.44811446462005416, 101.41773559917709],  # Koordinat lokasi baru
+        "tooltip": "ATM BCA PERTAMINA",
+        "popup": """
+        <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <img src="E:/Folderr/Comp-vision/SIG/images/ATM BCA pertamina.png" 
+                         width="200"><br>
+            <b>ATM BCA PERTAMINA</b><br>
+            <p>
+            Lokasi: Jl. Soekarno - Hatta, Sidomulyo Bar., Kec. Tampan, Kota Pekanbaru, Riau 28294<br>
+            Buka jam 07.00-23.00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+        """,
+        # "icon_color": "green",
+        # "icon_text_color": "white",
+    },
+    {
+        "lokasi": [0.436604828583938, 101.41876682499863],  # Koordinat lokasi baru
+        "tooltip": "ATM BRI Link",
+        "popup": """
+        <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <img src="E:/Folderr/Comp-vision/SIG/images/ATM BRI Link.png" 
+                         width="200"><br>
+            <b>ATM BRI Link</b><br>
+            <p>
+            Lokasi: Jl. Sidomulyo Bar., Kota Pekanbaru, Riau<br>
+            Buka jam 09.00-17.00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bri.co.id" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+        """,
+        # "icon_color": "green",
+        # "icon_text_color": "white",
+    },
+    {
+        "lokasi": [0.5172108757411183, 101.42297327062687],  # Koordinat lokasi baru
+        "tooltip": "BCA KCP Kas Durian",
+        "popup": """
+        <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <img src="E:/Folderr/Comp-vision/SIG/images/BCA KCP Kas Durian.png" 
+                         width="200"><br>
+            <b>BCA KCP Kas Durian</b><br>
+            <p>
+            Lokasi: Jl. Durian No.64, Labuh Baru Tim., Kec. Payung Sekaki, Kota Pekanbaru, Riau 28291<br>
+            Buka jam 09.00-17.00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+        """,
+        # "icon_color": "green",
+        # "icon_text_color": "white",
+    },
 ]
 
 data = []
