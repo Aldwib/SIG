@@ -9,7 +9,7 @@ query = """
 [out:json];
 area["name"="Indonesia"]->.countryArea;
 area["name"="Pekanbaru"](area.countryArea)->.cityArea;
-node["amenity"="atm"](area.cityArea);
+node["amenity"="hospital"](area.cityArea);
 out body;
 """
 
@@ -17,16 +17,16 @@ out body;
 result = api.query(query)
 
 # Tampilkan hasil jumlah data
-print(f"Jumlah ATM ditemukan: {len(result.nodes)}")
+print(f"Jumlah RS ditemukan: {len(result.nodes)}")
 
 # Simpan hasil ke file CSV
-with open("atm_pekanbaru.csv", "w", newline="", encoding="utf-8") as f:
+with open("Rs_pekanbaru.csv", "w", newline="", encoding="utf-8") as f:
     writer = csv.writer(f)
     writer.writerow(["Name", "Country", "City", "Latitude", "Longitude"])
     for node in result.nodes:
-        writer.writerow(["ATM", "Indonesia", "Pekanbaru", node.lat, node.lon])
+        writer.writerow(["RS", "Indonesia", "Pekanbaru", node.lat, node.lon])
 
-print("Data berhasil disimpan ke atm_pekanbaru.csv")
+print("Data berhasil disimpan ke Rs_pekanbaru.csv")
 
 
 # from selenium import webdriver
