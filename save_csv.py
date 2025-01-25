@@ -227,12 +227,12 @@ lokasi_atm_list = [
     },
     {
         "lokasi": [0.4676157, 101.4044837],  # Koordinat lokasi baru
-        "tooltip": "Bank BRI & BCA Delima",
+        "tooltip": "Bank BCA Delima",
         "popup": """
         <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
-            <img src="E:/Folderr/Comp-vision/SIG/images/atm bri delima.png" 
+            <img src="E:/Folderr/Comp-vision/SIG/images/atm bca delima.jpg" 
                          width="200"><br>
-            <b>	ATM BRI & BCA Alfamart</b><br>
+            <b>	ATM BCA Alfamart</b><br>
             <p>
             Lokasi: Jl. Delima, RT.01/RW.02, Tampan, Kec. Tampan, Kota Pekanbaru, Riau 28292<br>
             Layanan: <br>
@@ -240,7 +240,6 @@ lokasi_atm_list = [
             - Transfer Antar Rekening<br>
             - Informasi Saldo
             </p>
-            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a><br>
             <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
         </div>
         """,
