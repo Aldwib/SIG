@@ -104,13 +104,82 @@ custom_css = """
     margin: 5px 0;
     color: #666;
 }
+
+/* Filter styles */
+.filter-section {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.filter-section h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.filter-group {
+    margin-bottom: 10px;
+}
+
+.filter-group label {
+    display: block;
+    margin: 5px 0;
+    color: #666;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 </style>
 """
 
 custom_js = """
 <script>
+let markers = [];
+let activeFilters = {
+    bank: 'all',
+    location: 'all'
+};
+
+function getBankFromTitle(title) {
+    // Detect bank name from title
+    const banks = ['BRI', 'BNI', 'BCA', 'Mandiri'];
+    for (let bank of banks) {
+        if (title.toUpperCase().includes(bank)) {
+            return bank;
+        }
+    }
+    return 'Other';
+}
+
 function toggleSidebar() {
     document.getElementById("mySidebar").classList.toggle("active");
+}
+
+function updateFilters() {
+    activeFilters.bank = document.getElementById('bankFilter').value;
+    
+    markers.forEach(marker => {
+        const markerElement = marker.element;
+        const markerData = marker.data;
+        
+        let isVisible = true;
+        
+        if (activeFilters.bank !== 'all' && markerData.bank !== activeFilters.bank) {
+            isVisible = false;
+        }
+        
+        markerElement.style.display = isVisible ? 'block' : 'none';
+    });
 }
 
 function updateSidebarContent(content, title) {
@@ -135,7 +204,6 @@ map = folium.Map(location=[0.5071, 101.4478], zoom_start=13)
 
 # Update bagian pembuatan marker
 for index, row in data.iterrows():
-    # Buat marker dengan tooltip dan tanpa popup
     marker = folium.Marker(
         location=[row['Latitude'], row['Longitude']],
         tooltip=row['Title'],  # Menampilkan title di sebelah marker
@@ -152,17 +220,20 @@ for index, row in data.iterrows():
                 setTimeout(function() {{
                     var marker = document.getElementsByClassName('leaflet-marker-icon')[{index}];
                     if (marker) {{
+                        // Tambahkan data marker ke array global
+                        markers.push({{
+                            element: marker,
+                            data: {{
+                                bank: getBankFromTitle('{row['Title']}')
+                            }}
+                        }});
+                        
                         marker.addEventListener('click', function() {{
-                            // Reset semua marker ke default icon
                             var markers = document.querySelectorAll('.leaflet-marker-icon');
                             markers.forEach(function(m) {{
                                 m.src = 'icon/0.png';
                             }});
-                            
-                            // Set icon selected untuk marker yang diklik
                             this.src = 'icon/atm.png';
-                            
-                            // Update sidebar
                             updateSidebarContent(
                                 `{row['Content']}`,
                                 '{row['Title']}'
@@ -186,6 +257,20 @@ sidebar_html = """
     <div class="sidebar-header">
         <h3 id="sidebarTitle">ATM Information</h3>
         <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+    </div>
+    <div class="filter-section">
+        <h4>Filters</h4>
+        <div class="filter-group">
+            <label for="bankFilter">Bank:</label>
+            <select id="bankFilter" onchange="updateFilters()">
+                <option value="all">All Banks</option>
+                <option value="BRI">BRI</option>
+                <option value="BNI">BNI</option>
+                <option value="Mandiri">Mandiri</option>
+                <option value="BCA">BCA</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
     </div>
     <div class="sidebar-content" id="sidebarContent">
         <div class="atm-info">
