@@ -32,11 +32,14 @@ custom_css = """
     opacity: 0;
     padding: 20px;
     transition: opacity 0.3s ease;
-    margin-top: 6px;  /* Tambahkan margin agar konten tidak tertutup header */
 }
 
 .sidebar-content img {
     width: 360px;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
     }
 
 .sidebar.active .sidebar-content {
@@ -57,6 +60,10 @@ custom_css = """
     right: -400px;  /* Sembunyikan di luar layar */
     z-index: 10000;
     transition: right 0.5s ease;
+}
+
+.sidebar-header span {
+    cursor: pointer;
 }
 
 .sidebar.active .sidebar-header {
@@ -109,7 +116,6 @@ custom_css = """
 .filter-section {
     padding: 15px;
     border-bottom: 1px solid #eee;
-    margin-bottom: 15px;
 }
 
 .filter-section h4 {
@@ -265,8 +271,6 @@ sidebar_html = """
             <select id="bankFilter" onchange="updateFilters()">
                 <option value="all">All Banks</option>
                 <option value="BRI">BRI</option>
-                <option value="BNI">BNI</option>
-                <option value="Mandiri">Mandiri</option>
                 <option value="BCA">BCA</option>
                 <option value="Other">Other</option>
             </select>
