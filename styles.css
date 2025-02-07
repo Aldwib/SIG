@@ -1,0 +1,218 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #003366;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px 15px;
+    position: relative; /* Untuk posisi garis bawah */
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Jarak garis ke teks */
+    width: 0%;
+    height: 3px;
+    background: white; /* Warna garis */
+    transition: width 0.2s ease-in-out; /* Animasi garis muncul dengan delay 1 detik */
+}
+
+nav ul li a:hover::after {
+    width: 100%; /* Garis muncul penuh saat hover */
+}
+
+
+.hero {
+    height: 100vh;
+    background: url('icon/SIG1.jpg') no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-text {
+    position: relative;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+
+
+/* Bagian Tentang Website */
+#tentang-website {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#tentang-website .container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+#tentang-website .head-text h1 {
+    font-size: 2.5rem;
+    color: #003366;
+    margin-bottom: 10px;
+}
+
+#tentang-website .head-text p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.boxBenefit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    margin: 10px;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+}
+
+.item .icon img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.item h3 {
+    font-size: 1.5rem;
+    color: #003366;
+    margin-bottom: 5px;
+}
+
+.item p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.link-more {
+    margin-top: 20px;
+    display: inline-block;
+    background: #0073e6;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+}
+
+.link-more:hover {
+    background: #005bb5;
+}
+
+
+
+
+/* About Us */
+.tentang-kami {
+    text-align: center; /* Agar judul di tengah */
+    padding: 50px 20px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 20px; /* Beri jarak dengan card */
+}
+
+.card-container {
+    display: flex;
+    justify-content: center; /* Sejajarkan secara horizontal */
+    gap: 20px; /* Beri jarak antar card */
+    flex-wrap: wrap; /* Agar tetap responsif jika layar kecil */
+}
+
+.card {
+    background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px; /* Lebar card */
+    height: 250px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out; /* Efek scaling dengan delay 1 detik */
+}
+
+.card h3 {
+    color:#003366;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Tambahkan efek bayangan */
+}
+
+/* Footer*/
+.footer {
+    background: #003366; /* Warna gelap */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 16px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+

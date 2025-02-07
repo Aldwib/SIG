@@ -1,0 +1,1446 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Lokasi ATM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: #003366;
+            color: white;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0%;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .content-cell {
+            display: flex;
+            gap: 2rem;
+            align-items: start;
+            padding: 1rem;
+        }
+
+        .content-cell img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .content-cell div {
+            flex: 1;
+        }
+
+        .content-cell b {
+            display: block;
+            font-size: 1.1rem;
+            color: #003366;
+            margin-bottom: 1rem;
+        }
+
+        .content-cell p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .content-cell a {
+            color: #0066cc;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .content-cell a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            .content-cell {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .content-cell img {
+                width: 100%;
+                height: auto;
+                max-width: 300px;
+            }
+        }
+
+        .image-container {
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content-cell {
+            padding: 1rem;
+        }
+
+        .content-cell b {
+            display: block;
+            font-size: 1.1rem;
+            color: #003366;
+            margin-bottom: 1rem;
+        }
+
+        .content-cell p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .image-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .image-container {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        .title-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .map-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .map-link:hover {
+            text-decoration: underline;
+        }
+        
+        .map-link i {
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Sistem Informasi Geografis Bank BCA & BRI Pekanbaru</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="map.html">Peta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Koordinat</th>
+                    <th>Title</th>
+                    <th>Informasi</th>
+                    <th>Gambar</th>
+                </tr>
+
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5304492237446169</div>
+                        <div>Long: 101.41977976564556</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA Wira Kencana
+                            <a href="map.html?lat=0.5304492237446169&lng=101.41977976564556&title=ATM BCA Wira Kencana" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA Wira Kencana</b><br>
+            <p>
+            Lokasi: Jl. Soekarno - Hatta No.56, Labuh Baru Tim., Kec. Payung Sekaki, Kota Pekanbaru, Riau 28291<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="images/ATM BCA Wira Kencana1.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.536026381691666</div>
+                        <div>Long: 101.44551671167665</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI Unit Juanda
+                            <a href="map.html?lat=0.536026381691666&lng=101.44551671167665&title=Bank BRI Unit Juanda" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI Unit Juanda</b><br>
+            <p>
+            Lokasi: Jl. Ir. H. Juanda No.81-83, Sago, Kec. Senapelan, Kota Pekanbaru, Riau 28155<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/BRI Unit Juanda.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5266026764023216</div>
+                        <div>Long: 101.44723811101905</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI Unit Sudirman
+                            <a href="map.html?lat=0.5266026764023216&lng=101.44723811101905&title=Bank BRI Unit Sudirman" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI Unit Sudirman</b><br>
+            <p>
+            Lokasi: Jl. Jend. Sudirman, Sukaramai, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28156<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/bri unit sudirman.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5285256</div>
+                        <div>Long: 101.4390289</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI Unit Pasar Kodim
+                            <a href="map.html?lat=0.5285256&lng=101.4390289&title=Bank BRI Unit Pasar Kodim" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI Unit Pasar Kodim</b><br>
+            <p>
+            Lokasi: Jl. Cempaka No.88 A, RT.002/RW.002, Padang Bulan, Kec. Senapelan, Kota Pekanbaru, Riau 28281<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/Bank BRI Unit Pasar Kodim.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4642833373574643</div>
+                        <div>Long: 101.40015468131922</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI Unit Tampan
+                            <a href="map.html?lat=0.4642833373574643&lng=101.40015468131922&title=Bank BRI Unit Tampan" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI Unit Tampan</b><br>
+            <p>
+            Lokasi: Jl. Delima, Delima, Kec. Tampan, Kota Pekanbaru, Riau 28293<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="survey langsung/Bank BRI Unit Tampan.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5172272</div>
+                        <div>Long: 101.4178318</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI Unit Sigunggung
+                            <a href="map.html?lat=0.5172272&lng=101.4178318&title=Bank BRI Unit Sigunggung" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI Unit Sigunggung</b><br>
+            <p>
+            Lokasi: Jl. Dharma Bakti No.4, Labuh Baru Bar., Kec. Payung Sekaki, Kota Pekanbaru, Riau 28292<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="images/Bank BRI UNIT Sigunggung1.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5228709531071454</div>
+                        <div>Long: 101.44219459865889</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI KCP Ahmad Yani
+                            <a href="map.html?lat=0.5228709531071454&lng=101.44219459865889&title=Bank BRI KCP Ahmad Yani" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI KCP Ahmad Yani</b><br>
+            <p>
+            Lokasi: Jl. Jend. Ahmad Yani No.41 C, Kota Baru, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28113<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Customer Service
+            </p>
+            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/Bank bri kcp ayani.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5312510624526111</div>
+                        <div>Long: 101.44287105007132</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BCA KCP Ahmad Yani
+                            <a href="map.html?lat=0.5312510624526111&lng=101.44287105007132&title=Bank BCA KCP Ahmad Yani" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI KCP Ahmad Yani</b><br>
+            <p>
+            Lokasi: Jl. Jend. Ahmad Yani No.41 C, Kota Baru, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28113<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Customer Service
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="images/Bank BCA1 A. Yani.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.48172199314575</div>
+                        <div>Long: 101.41846972997268</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI Unit Kota Bertuah
+                            <a href="map.html?lat=0.48172199314575&lng=101.41846972997268&title=Bank BRI Unit Kota Bertuah" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI Soekarno-Hatta</b><br>
+            <p>
+            Lokasi: Jl. Soekarno - Hatta No.174, Delima, Kec. Tampan, Kota Pekanbaru, Riau 28292<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/atm bri Soekarno-Hatta.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4805712482152978</div>
+                        <div>Long: 101.41874971526678</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BRI Indomaret Fresh
+                            <a href="map.html?lat=0.4805712482152978&lng=101.41874971526678&title=ATM BRI Indomaret Fresh" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Indomaret Plus Sukarno Hatta</b><br>
+            <p>
+            Lokasi: Jl. Sukarno Hatta No. 1 A-D, Sidomulyo Timur, Marpoyan Damai, Pekanbaru City, Riau 28282<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/ATM bri indomaret fresh.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4239468</div>
+                        <div>Long: 101.4377786</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Mesin ATM BRI
+                            <a href="map.html?lat=0.4239468&lng=101.4377786&title=Mesin ATM BRI" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BRI</b><br>
+            <p>
+            Lokasi: Simpang Tiga, Kec. Bukit Raya, Kota Pekanbaru, Riau 28283<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/Jl. Kaharuddin Nst di batalyon.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4773509</div>
+                        <div>Long: 101.4067191</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Mesin ATM BRI Indomaret Delima
+                            <a href="map.html?lat=0.4773509&lng=101.4067191&title=Mesin ATM BRI Indomaret Delima" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BRI Indomaret Delima 1</b><br>
+            <p>
+            Lokasi: Jl. Delima No.24, Delima, Kec. Tampan, Kota Pekanbaru, Riau 28292<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="survey langsung/mesin atm bca indomaret delima.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4713101519630713</div>
+                        <div>Long: 101.40506031402332</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Mesin ATM BCA Indomaret Delima
+                            <a href="map.html?lat=0.4713101519630713&lng=101.40506031402332&title=Mesin ATM BCA Indomaret Delima" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA Indomart Delima 99</b><br>
+            <p>
+            Lokasi: Jl. Delima No.150, Delima, Kec. Tampan, Kota Pekanbaru, Riau 28292<br>
+            Buka jam 07:00 - 22:00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="survey langsung/bca indomaret delima.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4735446886058915</div>
+                        <div>Long: 101.4059148010677</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Mesin ATM BRI JumboMart
+                            <a href="map.html?lat=0.4735446886058915&lng=101.4059148010677&title=Mesin ATM BRI JumboMart" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BRI (Jumbo Mart Jalan Delima)</b><br>
+            <p>
+            Lokasi: Jl. Delima No.24, Delima, Kec. Tampan, Kota Pekanbaru, Riau 28292<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="survey langsung/mesin atm bri, jumbo.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4644096389654465</div>
+                        <div>Long: 101.3997081002507</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BRI Indomaret Subrantas 360
+                            <a href="map.html?lat=0.4644096389654465&lng=101.3997081002507&title=ATM BRI Indomaret Subrantas 360" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BRI Indomaret Subrantas 360</b><br>
+            <p>
+            Lokasi: Jl. HR. Soebrantas, Delima, Kec. Tampan, Kota Pekanbaru, Riau 28293<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="images/ATM BRI Indomaret subrantas 360.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4636768774831958</div>
+                        <div>Long: 101.40140100504804</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BRI Indomaret Spg. Purwodadi Pekanbaru
+                            <a href="map.html?lat=0.4636768774831958&lng=101.40140100504804&title=ATM BRI Indomaret Spg. Purwodadi Pekanbaru" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BRI Indomaret Spg. Purwodadi Pekanbaru</b><br>
+            <p>
+            Lokasi: Jl. Purwodadi Ujung, Sidomulyo Bar., Kec. Tampan, Kota Pekanbaru, Riau 28293<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="images/Indomaret Spg. Purwodadi Pekanbaru.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.463145</div>
+                        <div>Long: 101.453322</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA Indomaret Kaharuddin Nasution 105
+                            <a href="map.html?lat=0.463145&lng=101.453322&title=ATM BCA Indomaret Kaharuddin Nasution 105" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA Indomaret Kaharuddin Nasution 105</b><br>
+            <p>
+            Lokasi: Simpang Tiga, Kec. Bukit Raya, Kota Pekanbaru, Riau<br>
+            Buka jam 07:00 - 22:00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/ATM BCA Indomaret Kaharuddin Nasution 105.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4611373588357912</div>
+                        <div>Long: 101.40189050683874</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA Swalayan D Seven
+                            <a href="map.html?lat=0.4611373588357912&lng=101.40189050683874&title=ATM BCA Swalayan D Seven" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA Swalayan D'Seven</b><br>
+            <p>
+            Lokasi : Sidomulyo Bar., Kec. Tampan, Kota Pekanbaru, Riau 28294<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="images/Swalayan D'Seven.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4645533</div>
+                        <div>Long: 101.3714302</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA Indomaret
+                            <a href="map.html?lat=0.4645533&lng=101.3714302&title=ATM BCA Indomaret" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA Indomaret SPBU PRIMA PUTRA PABAN</b><br>
+            <p>
+            Lokasi: Simpang Baru, Kec. Tampan, Kota Pekanbaru, Riau 28293<br>
+            Buka jam 07:00 - 22:00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/Indomaret SPBU PRIMA PUTRA PABAN.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5209476</div>
+                        <div>Long: 101.4198492</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA BIG LAND - Pekanbaru
+                            <a href="map.html?lat=0.5209476&lng=101.4198492&title=ATM BCA BIG LAND - Pekanbaru" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA BIG LAND - Pekanbaru</b><br>
+            <p>
+            Lokasi: Jl. Soekarno - Hatta No.8, Labuh Baru Bar., Kec. Payung Sekaki, Kota Pekanbaru, Riau 28291<br>
+            Buka jam 09.00-17.00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/ATM BCA BIG LAND - Pekanbaru.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4481144646200541</div>
+                        <div>Long: 101.41773559917708</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA PERTAMINA
+                            <a href="map.html?lat=0.4481144646200541&lng=101.41773559917708&title=ATM BCA PERTAMINA" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA PERTAMINA</b><br>
+            <p>
+            Lokasi: Jl. Soekarno - Hatta, Sidomulyo Bar., Kec. Tampan, Kota Pekanbaru, Riau 28294<br>
+            Buka jam 07.00-23.00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/ATM BCA pertamina.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5172108757411183</div>
+                        <div>Long: 101.42297327062688</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            BCA KCP Kas Durian
+                            <a href="map.html?lat=0.5172108757411183&lng=101.42297327062688&title=BCA KCP Kas Durian" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>BCA KCP Kas Durian</b><br>
+            <p>
+            Lokasi: Jl. Durian No.64, Labuh Baru Tim., Kec. Payung Sekaki, Kota Pekanbaru, Riau 28291<br>
+            Buka jam 09.00-17.00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo <br>
+            - Customer Service
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/BCA KCP Kas Durian.png" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4676157</div>
+                        <div>Long: 101.4044837</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA Delima
+                            <a href="map.html?lat=0.4676157&lng=101.4044837&title=ATM BCA Delima" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>	ATM BCA Alfamart</b><br>
+            Buka jam 08:00 - 22:00<br>
+            <p>
+            Lokasi: Jl. Delima, RT.01/RW.02, Tampan, Kec. Tampan, Kota Pekanbaru, Riau 28292<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/images/atm bca delima.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5304166839239566</div>
+                        <div>Long: 101.44209714204648</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA & BRI Pasar kodim
+                            <a href="map.html?lat=0.5304166839239566&lng=101.44209714204648&title=ATM BCA & BRI Pasar kodim" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM Bank BCA</b><br>
+            <p>
+            Lokasi: Jl. Jend. Ahmad Yani No.43, Padang Bulan, Kec. Senapelan, Kota Pekanbaru, Riau 28155<br>
+            Buka jam 09:00 - 21:00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo<br>
+            - Setor Tunai (BCA)
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a><br>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bca&bri, pasar kodim.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.501997</div>
+                        <div>Long: 101.423809</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Mesin ATM BCA
+                            <a href="map.html?lat=0.501997&lng=101.423809&title=Mesin ATM BCA" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM Bank BCA</b><br>
+            <p>
+            Lokasi: Jl. Tuan Tambusai No.18J,K,L, Labuh Baru Tim., Kec. Payung Sekaki, Kota Pekanbaru, Riau 28292<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo<br>
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bca, jl nangka.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.506257</div>
+                        <div>Long: 101.436936</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI Unit Tuanku Tambusai
+                            <a href="map.html?lat=0.506257&lng=101.436936&title=Bank BRI Unit Tuanku Tambusai" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI Unit Tuanku Tambusai Pekanbaru</b><br>
+            <p>
+            Lokasi: Jl. Tuanku Tambusai No.22, Labuh Baru Tim., Kec. Sukajadi, Kota Pekanbaru, Riau 28122<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo<br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/bank atm bri, jl tuanku.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.525302</div>
+                        <div>Long: 101.434421</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Mesin ATM BRI Melur
+                            <a href="map.html?lat=0.525302&lng=101.434421&title=Mesin ATM BRI Melur" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM Bank BCA</b><br>
+            <p>
+            Lokasi: Jl. Melur No.103, Harjosari, Kec. Sukajadi, Kota Pekanbaru, Riau 28156<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo<br>
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bri, jl melur.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.527508</div>
+                        <div>Long: 101.43449</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Mesin ATM BCA Melur Swalayan
+                            <a href="map.html?lat=0.527508&lng=101.43449&title=Mesin ATM BCA Melur Swalayan" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM Bank BCA</b><br>
+            <p>
+            Lokasi: Jl. Melur-Pekanbaru, Harjosari, Kec. Sukajadi, Kota Pekanbaru, Riau 28156<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo<br>
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bca, melur swalayan.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.480041</div>
+                        <div>Long: 101.434597</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI KK Bukit Raya
+                            <a href="map.html?lat=0.480041&lng=101.434597&title=Bank BRI KK Bukit Raya" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI KK Bukit Raya</b><br>
+            <p>
+            Lokasi: Jl. Sidomulyo Tim., Kota Pekanbaru, Riau<br>
+            Buka jam 08:00 - 13:00<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo<br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/bank atm bri, bukit raya.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4569261803542611</div>
+                        <div>Long: 101.45278142170623</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI KCP Simpang Tiga
+                            <a href="map.html?lat=0.4569261803542611&lng=101.45278142170623&title=Bank BRI KCP Simpang Tiga" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI KCP Simpang Tiga</b><br>
+            <p>
+            Lokasi: Jl. Kharudin Nasution No.171 E-F, Riau 29352<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo<br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/bank atm bri, KCP simpang3.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.4426552969519027</div>
+                        <div>Long: 101.44926425525068</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BRI Unit Marpoyan
+                            <a href="map.html?lat=0.4426552969519027&lng=101.44926425525068&title=Bank BRI Unit Marpoyan" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>Bank BRI Unit Marpoyan</b><br>
+            <p>
+            Lokasi: Jl. Kaharuddin Nst No.292B, Perhentian Marpoyan, Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28284<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo<br>
+            - Setor Tunai <br>
+            - Customer Service
+            </p>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/bank atm bri, kcp marpoyan.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.437723</div>
+                        <div>Long: 101.455343</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            ATM BCA Pasir Putih
+                            <a href="map.html?lat=0.437723&lng=101.455343&title=ATM BCA Pasir Putih" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA Pasir Putih</b><br>
+            <p>
+            Lokasi: CFQ4+34G Tanah Merah, Kabupaten Kampar, Riau<br>
+            Buka 24 jam<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bca, pasir putih.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td style="white-space: nowrap;">
+                        <div>Lat: 0.5212480363295593</div>
+                        <div>Long: 101.4473035647124</div>
+                    </td>
+                    <td>
+                        <div class="title-cell">
+                            Bank BCA KCU PEKANBARU
+                            <a href="map.html?lat=0.5212480363295593&lng=101.4473035647124&title=Bank BCA KCU PEKANBARU" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-cell">
+                            <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
+            <br>
+            <b>ATM BCA Pasir Putih</b><br>
+            <p>
+            Lokasi: Jl. Jend. Sudirman No.448, Tanah Datar, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28115<br>
+            Buka jam 08:00 - 15:30<br>
+            Layanan: <br>
+            - Penarikan Tunai<br>
+            - Transfer Antar Rekening<br>
+            - Informasi Saldo
+            </p>
+            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+        </div>
+                        </div>
+                    </td>
+                    <td style="width: 300px;">
+                        <div class="image-container">
+                            <img src="images/BANK BCA KCU PEKANBARU.jpg" width="200">
+                        </div>
+                    </td>
+                </tr>
+    
+            </table>
+        </div>
+    </div>
+</body>
+</html>
