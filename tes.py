@@ -202,6 +202,30 @@ document.addEventListener('click', function(e) {
         document.getElementById("mySidebar").classList.remove("active");
     }
 });
+
+// Add URL parameter handling
+function handleUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lat = urlParams.get('lat');
+    const lng = urlParams.get('lng');
+    const title = urlParams.get('title');
+    
+    if (lat && lng && title) {
+        // Find the matching marker
+        markers.forEach(marker => {
+            if (marker.data.lat === parseFloat(lat) && 
+                marker.data.lng === parseFloat(lng)) {
+                // Trigger click on the marker
+                marker.element.click();
+                // Center map on marker
+                map.setView([lat, lng], 15);
+            }
+        });
+    }
+}
+
+// Call handleUrlParams after markers are initialized
+setTimeout(handleUrlParams, 1500);
 </script>
 """
 
@@ -230,7 +254,9 @@ for index, row in data.iterrows():
                         markers.push({{
                             element: marker,
                             data: {{
-                                bank: getBankFromTitle('{row['Title']}')
+                                bank: getBankFromTitle('{row['Title']}'),
+                                lat: {row['Latitude']},
+                                lng: {row['Longitude']}
                             }}
                         }});
                         
