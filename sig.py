@@ -158,7 +158,7 @@ let activeFilters = {
 
 function getBankFromTitle(title) {
     // Detect bank name from title
-    const banks = ['BRI', 'BNI', 'BCA', 'Mandiri'];
+    const banks = ['BRI', 'BCA'];
     for (let bank of banks) {
         if (title.toUpperCase().includes(bank)) {
             return bank;

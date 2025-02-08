@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 # Load CSV file
 csv_file = "lokasi_atm.csv"
@@ -78,6 +79,10 @@ html_content = """
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
+        }
+
+        .filter-container {
+            margin-bottom: 1rem;
         }
 
         .table-container {
@@ -241,6 +246,23 @@ html_content = """
         .map-link i {
             font-size: 0.8rem;
         }
+
+        /* Footer*/
+        .footer {
+            background: #003366; /* Warna gelap */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 16px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-content p {
+            margin: 5px 0;
+        }
+        
     </style>
 </head>
 <body>
@@ -257,8 +279,16 @@ html_content = """
     </header>
 
     <div class="container">
+        <div class="filter-container">
+            <label for="filter">Filter by Bank:</label>
+            <select id="filter">
+                <option value="all">All</option>
+                <option value="BCA">BCA</option>
+                <option value="BRI">BRI</option>
+            </select>
+        </div>
         <div class="table-container">
-            <table>
+            <table id="atmTable">
                 <tr>
                     <th>Koordinat</th>
                     <th>Title</th>
@@ -269,7 +299,6 @@ html_content = """
 
 for _, row in df.iterrows():
     # Extract image tag from Content
-    import re
     img_pattern = r'<img[^>]+>'
     img_match = re.search(img_pattern, row['Content'])
     content_without_img = re.sub(img_pattern, '', row['Content']) if img_match else row['Content']
@@ -278,8 +307,11 @@ for _, row in df.iterrows():
     # Create map link with coordinates
     map_link = f'<a href="map.html?lat={row["Latitude"]}&lng={row["Longitude"]}&title={row["Title"]}" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>'
     
+    # Determine the bank from the title
+    bank = "BCA" if "BCA" in row['Title'] else "BRI" if "BRI" in row['Title'] else "Other"
+    
     html_content += f"""
-                <tr>
+                <tr class="atm-row" data-bank="{bank}">
                     <td style="white-space: nowrap;">
                         <div>Lat: {row['Latitude']}</div>
                         <div>Long: {row['Longitude']}</div>
@@ -307,6 +339,29 @@ html_content += """
             </table>
         </div>
     </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 ALIF JAWA | CIHUYY</p>
+            <p>Temukan lokasi bank BCA & BRI dengan mudah dan cepat.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("filter").addEventListener("change", function() {
+            var filter = this.value.toUpperCase();
+            var rows = document.querySelectorAll(".atm-row");
+            
+            rows.forEach(row => {
+                var bank = row.getAttribute("data-bank").toUpperCase();
+                if (filter === "ALL" || bank === filter) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 """
