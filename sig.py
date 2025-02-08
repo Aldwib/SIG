@@ -73,8 +73,8 @@ custom_css = """
 .menu-btn {
     position: fixed;
     z-index: 9998;
-    right: 20px;
-    top: 20px;
+    right: 10px;
+    top: 70px;
     background: white;
     padding: 10px 15px;
     border-radius: 4px;
@@ -158,7 +158,7 @@ let activeFilters = {
 
 function getBankFromTitle(title) {
     // Detect bank name from title
-    const banks = ['BRI', 'BCA'];
+    const banks = ['BRI', 'BNI', 'BCA', 'Mandiri'];
     for (let bank of banks) {
         if (title.toUpperCase().includes(bank)) {
             return bank;
