@@ -53,7 +53,7 @@ nav ul li a:hover::after {
 
 .hero {
     height: 100vh;
-    background: url('icon/SIG1.jpg') no-repeat center center/cover;
+    background: url('E:/Folderr/Comp-vision/SIG/Image folders/icon/SIG1.jpg') no-repeat center center/cover;
     position: relative;
     display: flex;
     align-items: center;

@@ -4,7 +4,7 @@ from folium import *
 import pandas as pd
 
 # Baca file CSV
-csv_file = "lokasi_atm.csv"
+csv_file = "sumber data/lokasi_atm.csv"
 data = pd.read_csv(csv_file)
 
 # Custom CSS dan JavaScript untuk sidebar
@@ -275,7 +275,7 @@ for index, row in data.iterrows():
         location=[row['Latitude'], row['Longitude']],
         tooltip=row['Title'],  # Menampilkan title di sebelah marker
         icon=folium.CustomIcon(
-            icon_image="icon/0.png",
+            icon_image="Image folders/icon/0.png",
             icon_size=(40, 40)
         )
     )
@@ -300,9 +300,9 @@ for index, row in data.iterrows():
                         marker.addEventListener('click', function() {{
                             var markers = document.querySelectorAll('.leaflet-marker-icon');
                             markers.forEach(function(m) {{
-                                m.src = 'icon/0.png';
+                                m.src = 'E:/Folderr/Comp-vision/SIG/Image folders/icon/0.png';
                             }});
-                            this.src = 'icon/atm.png';
+                            this.src = 'E:/Folderr/Comp-vision/SIG/Image folders/icon/atm.png';
                             updateSidebarContent(
                                 `{row['Content']}`,
                                 '{row['Title']}'
@@ -319,10 +319,10 @@ for index, row in data.iterrows():
 
 # Menambahkan HTML elements untuk tombol Home dan List
 home_list_buttons_html = """
-<div class="home-btn" onclick="window.location.href='index.html'">
+<div class="home-btn" onclick="window.location.href='E:/Folderr/Comp-vision/SIG/tampilan/index.html'">
     <i class="fa fa-home"></i> Home
 </div>
-<div class="list-btn" onclick="window.location.href='list.html'">
+<div class="list-btn" onclick="window.location.href='E:/Folderr/Comp-vision/SIG/tampilan/list.html'">
     <i class="fa fa-list"></i> Tabel
 </div>
 """
@@ -369,4 +369,4 @@ map.get_root().html.add_child(folium.Element(font_awesome + custom_css + custom_
 LayerControl().add_to(map)
 
 # Menyimpan peta
-map.save("map.html")
+map.save("tampilan/map.html")

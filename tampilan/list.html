@@ -73,6 +73,10 @@
             padding: 0 1rem;
         }
 
+        .filter-container {
+            margin-bottom: 1rem;
+        }
+
         .table-container {
             background: white;
             border-radius: 8px;
@@ -234,6 +238,23 @@
         .map-link i {
             font-size: 0.8rem;
         }
+
+        /* Footer*/
+        .footer {
+            background: #003366; /* Warna gelap */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 16px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-content p {
+            margin: 5px 0;
+        }
+        
     </style>
 </head>
 <body>
@@ -250,8 +271,16 @@
     </header>
 
     <div class="container">
+        <div class="filter-container">
+            <label for="filter">Filter by Bank:</label>
+            <select id="filter">
+                <option value="all">All</option>
+                <option value="BCA">BCA</option>
+                <option value="BRI">BRI</option>
+            </select>
+        </div>
         <div class="table-container">
-            <table>
+            <table id="atmTable">
                 <tr>
                     <th>Koordinat</th>
                     <th>Title</th>
@@ -259,15 +288,15 @@
                     <th>Gambar</th>
                 </tr>
 
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5304492237446169</div>
                         <div>Long: 101.41977976564556</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA Wira Kencana
-                            <a href="map.html?lat=0.5304492237446169&lng=101.41977976564556&title=ATM BCA Wira Kencana" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BCA Wira Kencana
+                            <a href="map.html?lat=0.5304492237446169&lng=101.41977976564556&title=Mesin ATM BCA Wira Kencana" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -289,12 +318,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="images/ATM BCA Wira Kencana1.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/ATM BCA Wira Kencana1.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.536026381691666</div>
                         <div>Long: 101.44551671167665</div>
@@ -326,12 +355,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/BRI Unit Juanda.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/BRI Unit Juanda.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5266026764023216</div>
                         <div>Long: 101.44723811101905</div>
@@ -363,12 +392,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/bri unit sudirman.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/bri unit sudirman.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5285256</div>
                         <div>Long: 101.4390289</div>
@@ -400,12 +429,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/Bank BRI Unit Pasar Kodim.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/Bank BRI Unit Pasar Kodim.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4642833373574643</div>
                         <div>Long: 101.40015468131922</div>
@@ -437,12 +466,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="survey langsung/Bank BRI Unit Tampan.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/Bank BRI Unit Tampan.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5172272</div>
                         <div>Long: 101.4178318</div>
@@ -474,12 +503,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="images/Bank BRI UNIT Sigunggung1.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/Bank BRI UNIT Sigunggung1.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5228709531071454</div>
                         <div>Long: 101.44219459865889</div>
@@ -510,12 +539,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/Bank bri kcp ayani.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/Bank bri kcp ayani.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5312510624526111</div>
                         <div>Long: 101.44287105007132</div>
@@ -530,7 +559,7 @@
                         <div class="content-cell">
                             <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
             <br>
-            <b>Bank BRI KCP Ahmad Yani</b><br>
+            <b>Bank BCA KCP Ahmad Yani</b><br>
             <p>
             Lokasi: Jl. Jend. Ahmad Yani No.41 C, Kota Baru, Kec. Pekanbaru Kota, Kota Pekanbaru, Riau 28113<br>
             Buka 24 jam<br>
@@ -546,12 +575,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="images/Bank BCA1 A. Yani.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/Bank BCA1 A. Yani.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.48172199314575</div>
                         <div>Long: 101.41846972997268</div>
@@ -583,20 +612,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/atm bri Soekarno-Hatta.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/atm bri Soekarno-Hatta.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4805712482152978</div>
                         <div>Long: 101.41874971526678</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BRI Indomaret Fresh
-                            <a href="map.html?lat=0.4805712482152978&lng=101.41874971526678&title=ATM BRI Indomaret Fresh" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BRI Indomaret Fresh
+                            <a href="map.html?lat=0.4805712482152978&lng=101.41874971526678&title=Mesin ATM BRI Indomaret Fresh" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -618,12 +647,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/ATM bri indomaret fresh.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/ATM bri indomaret fresh.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4239468</div>
                         <div>Long: 101.4377786</div>
@@ -653,12 +682,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/Jl. Kaharuddin Nst di batalyon.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/Jl. Kaharuddin Nst di batalyon.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4773509</div>
                         <div>Long: 101.4067191</div>
@@ -688,12 +717,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="survey langsung/mesin atm bca indomaret delima.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/mesin atm bca indomaret delima.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4713101519630713</div>
                         <div>Long: 101.40506031402332</div>
@@ -723,12 +752,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="survey langsung/bca indomaret delima.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/bca indomaret delima.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4735446886058915</div>
                         <div>Long: 101.4059148010677</div>
@@ -758,20 +787,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="survey langsung/mesin atm bri, jumbo.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/mesin atm bri, jumbo.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4644096389654465</div>
                         <div>Long: 101.3997081002507</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BRI Indomaret Subrantas 360
-                            <a href="map.html?lat=0.4644096389654465&lng=101.3997081002507&title=ATM BRI Indomaret Subrantas 360" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BRI Indomaret Subrantas 360
+                            <a href="map.html?lat=0.4644096389654465&lng=101.3997081002507&title=Mesin ATM BRI Indomaret Subrantas 360" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -793,20 +822,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="images/ATM BRI Indomaret subrantas 360.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/ATM BRI Indomaret subrantas 360.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4636768774831958</div>
                         <div>Long: 101.40140100504804</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BRI Indomaret Spg. Purwodadi Pekanbaru
-                            <a href="map.html?lat=0.4636768774831958&lng=101.40140100504804&title=ATM BRI Indomaret Spg. Purwodadi Pekanbaru" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BRI Indomaret Purwodadi
+                            <a href="map.html?lat=0.4636768774831958&lng=101.40140100504804&title=Mesin ATM BRI Indomaret Purwodadi" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -828,20 +857,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="images/Indomaret Spg. Purwodadi Pekanbaru.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/Indomaret Spg. Purwodadi Pekanbaru.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.463145</div>
                         <div>Long: 101.453322</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA Indomaret Kaharuddin Nasution 105
-                            <a href="map.html?lat=0.463145&lng=101.453322&title=ATM BCA Indomaret Kaharuddin Nasution 105" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BCA Indomaret K.H Nasution
+                            <a href="map.html?lat=0.463145&lng=101.453322&title=Mesin ATM BCA Indomaret K.H Nasution" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -863,20 +892,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/ATM BCA Indomaret Kaharuddin Nasution 105.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/ATM BCA Indomaret Kaharuddin Nasution 105.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4611373588357912</div>
                         <div>Long: 101.40189050683874</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA Swalayan D Seven
-                            <a href="map.html?lat=0.4611373588357912&lng=101.40189050683874&title=ATM BCA Swalayan D Seven" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BCA Swalayan D Seven
+                            <a href="map.html?lat=0.4611373588357912&lng=101.40189050683874&title=Mesin ATM BCA Swalayan D Seven" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -898,20 +927,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="images/Swalayan D'Seven.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/Swalayan D'Seven.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4645533</div>
                         <div>Long: 101.3714302</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA Indomaret
-                            <a href="map.html?lat=0.4645533&lng=101.3714302&title=ATM BCA Indomaret" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BCA Indomaret
+                            <a href="map.html?lat=0.4645533&lng=101.3714302&title=Mesin ATM BCA Indomaret" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -933,20 +962,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/Indomaret SPBU PRIMA PUTRA PABAN.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/Indomaret SPBU PRIMA PUTRA PABAN.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5209476</div>
                         <div>Long: 101.4198492</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA BIG LAND - Pekanbaru
-                            <a href="map.html?lat=0.5209476&lng=101.4198492&title=ATM BCA BIG LAND - Pekanbaru" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BCA BIG LAND - Pekanbaru
+                            <a href="map.html?lat=0.5209476&lng=101.4198492&title=Mesin ATM BCA BIG LAND - Pekanbaru" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -968,20 +997,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/ATM BCA BIG LAND - Pekanbaru.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/ATM BCA BIG LAND - Pekanbaru.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4481144646200541</div>
                         <div>Long: 101.41773559917708</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA PERTAMINA
-                            <a href="map.html?lat=0.4481144646200541&lng=101.41773559917708&title=ATM BCA PERTAMINA" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BCA PERTAMINA
+                            <a href="map.html?lat=0.4481144646200541&lng=101.41773559917708&title=Mesin ATM BCA PERTAMINA" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -1003,20 +1032,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/ATM BCA pertamina.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/ATM BCA pertamina.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5172108757411183</div>
                         <div>Long: 101.42297327062688</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            BCA KCP Kas Durian
-                            <a href="map.html?lat=0.5172108757411183&lng=101.42297327062688&title=BCA KCP Kas Durian" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Bank BCA KCP Kas Durian
+                            <a href="map.html?lat=0.5172108757411183&lng=101.42297327062688&title=Bank BCA KCP Kas Durian" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -1039,20 +1068,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/BCA KCP Kas Durian.png" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/BCA KCP Kas Durian.png" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4676157</div>
                         <div>Long: 101.4044837</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA Delima
-                            <a href="map.html?lat=0.4676157&lng=101.4044837&title=ATM BCA Delima" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BCA Delima
+                            <a href="map.html?lat=0.4676157&lng=101.4044837&title=Mesin ATM BCA Delima" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -1074,27 +1103,27 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/images/atm bca delima.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/atm bca delima.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5304166839239566</div>
                         <div>Long: 101.44209714204648</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA & BRI Pasar kodim
-                            <a href="map.html?lat=0.5304166839239566&lng=101.44209714204648&title=ATM BCA & BRI Pasar kodim" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BRI Pasar kodim
+                            <a href="map.html?lat=0.5304166839239566&lng=101.44209714204648&title=Mesin ATM BRI Pasar kodim" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
                         <div class="content-cell">
                             <div style="font-family: Arial; font-size: 12px; line-height: 1.5;">
             <br>
-            <b>ATM Bank BCA</b><br>
+            <b>ATM Bank BRI</b><br>
             <p>
             Lokasi: Jl. Jend. Ahmad Yani No.43, Padang Bulan, Kec. Senapelan, Kota Pekanbaru, Riau 28155<br>
             Buka jam 09:00 - 21:00<br>
@@ -1102,21 +1131,19 @@
             - Penarikan Tunai<br>
             - Transfer Antar Rekening<br>
             - Informasi Saldo<br>
-            - Setor Tunai (BCA)
             </p>
-            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a><br>
-            <a href="https://www.bca.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BCA</a>
+            <a href="http://bri.co.id/" target="_blank" style="color: blue; text-decoration: underline;">Kunjungi Situs BRI</a>
         </div>
                         </div>
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bca&bri, pasar kodim.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/mesin atm bca&bri, pasar kodim.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.501997</div>
                         <div>Long: 101.423809</div>
@@ -1146,12 +1173,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bca, jl nangka.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/mesin atm bca, jl nangka.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.506257</div>
                         <div>Long: 101.436936</div>
@@ -1183,12 +1210,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/bank atm bri, jl tuanku.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/bank atm bri, jl tuanku.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.525302</div>
                         <div>Long: 101.434421</div>
@@ -1218,12 +1245,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bri, jl melur.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/mesin atm bri, jl melur.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.527508</div>
                         <div>Long: 101.43449</div>
@@ -1253,12 +1280,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bca, melur swalayan.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/mesin atm bca, melur swalayan.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.480041</div>
                         <div>Long: 101.434597</div>
@@ -1290,12 +1317,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/bank atm bri, bukit raya.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/bank atm bri, bukit raya.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4569261803542611</div>
                         <div>Long: 101.45278142170623</div>
@@ -1327,12 +1354,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/bank atm bri, KCP simpang3.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/bank atm bri, KCP simpang3.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BRI">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.4426552969519027</div>
                         <div>Long: 101.44926425525068</div>
@@ -1364,20 +1391,20 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/bank atm bri, kcp marpoyan.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/bank atm bri, kcp marpoyan.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.437723</div>
                         <div>Long: 101.455343</div>
                     </td>
                     <td>
                         <div class="title-cell">
-                            ATM BCA Pasir Putih
-                            <a href="map.html?lat=0.437723&lng=101.455343&title=ATM BCA Pasir Putih" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
+                            Mesin ATM BCA Pasir Putih
+                            <a href="map.html?lat=0.437723&lng=101.455343&title=Mesin ATM BCA Pasir Putih" class="map-link"><i class="fas fa-map-marker-alt"></i> Lihat pada peta</a>
                         </div>
                     </td>
                     <td>
@@ -1399,12 +1426,12 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="E:/Folderr/Comp-vision/SIG/survey langsung/mesin atm bca, pasir putih.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/survey langsung/mesin atm bca, pasir putih.jpg" width="200">
                         </div>
                     </td>
                 </tr>
     
-                <tr>
+                <tr class="atm-row" data-bank="BCA">
                     <td style="white-space: nowrap;">
                         <div>Lat: 0.5212480363295593</div>
                         <div>Long: 101.4473035647124</div>
@@ -1434,7 +1461,7 @@
                     </td>
                     <td style="width: 300px;">
                         <div class="image-container">
-                            <img src="images/BANK BCA KCU PEKANBARU.jpg" width="200">
+                            <img src="E:/Folderr/Comp-vision/SIG/Image folders/google/BANK BCA KCU PEKANBARU.jpg" width="200">
                         </div>
                     </td>
                 </tr>
@@ -1442,5 +1469,28 @@
             </table>
         </div>
     </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 ALIF JAWA | CIHUYY</p>
+            <p>Temukan lokasi bank BCA & BRI dengan mudah dan cepat.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("filter").addEventListener("change", function() {
+            var filter = this.value.toUpperCase();
+            var rows = document.querySelectorAll(".atm-row");
+            
+            rows.forEach(row => {
+                var bank = row.getAttribute("data-bank").toUpperCase();
+                if (filter === "ALL" || bank === filter) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>

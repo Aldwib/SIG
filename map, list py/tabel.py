@@ -2,7 +2,7 @@ import pandas as pd
 import re
 
 # Load CSV file
-csv_file = "lokasi_atm.csv"
+csv_file = "sumber data/lokasi_atm.csv"
 df = pd.read_csv(csv_file)
 
 # Generate HTML file with modern design
@@ -367,7 +367,7 @@ html_content += """
 """
 
 # Save to HTML file
-output_file = "list.html"
+output_file = "tampilan/list.html"
 with open(output_file, "w", encoding="utf-8") as file:
     file.write(html_content)
 
