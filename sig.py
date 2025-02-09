@@ -10,6 +10,43 @@ data = pd.read_csv(csv_file)
 # Custom CSS dan JavaScript untuk sidebar
 custom_css = """
 <style>
+.home-btn {
+    position: fixed;
+    z-index: 9998;
+    left: 10px;
+    top: 80px;
+    background: white;
+    padding: 10px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.list-btn {
+    position: fixed;
+    z-index: 9998;
+    left: 10px;
+    top: 130px;  /* Adjusted to avoid overlap with home button */
+    background: white;
+    padding: 10px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.home-btn i, .list-btn i {
+    font-size: 17px;
+    margin-right: 5px;
+}
+
 .sidebar {
     height: 100%;
     width: 0;
@@ -158,7 +195,7 @@ let activeFilters = {
 
 function getBankFromTitle(title) {
     // Detect bank name from title
-    const banks = ['BRI', 'BNI', 'BCA', 'Mandiri'];
+    const banks = ['BRI', 'BCA'];
     for (let bank of banks) {
         if (title.toUpperCase().includes(bank)) {
             return bank;
@@ -230,7 +267,7 @@ setTimeout(handleUrlParams, 1500);
 """
 
 # Membuat peta
-map = folium.Map(location=[0.5071, 101.4478], zoom_start=13)
+map = folium.Map(location=[0.5071, 101.4478], zoom_start=12)
 
 # Update bagian pembuatan marker
 for index, row in data.iterrows():
@@ -280,6 +317,16 @@ for index, row in data.iterrows():
     marker.add_to(map)
     map.get_root().html.add_child(element)
 
+# Menambahkan HTML elements untuk tombol Home dan List
+home_list_buttons_html = """
+<div class="home-btn" onclick="window.location.href='index.html'">
+    <i class="fa fa-home"></i> Home
+</div>
+<div class="list-btn" onclick="window.location.href='list.html'">
+    <i class="fa fa-list"></i> Tabel
+</div>
+"""
+
 # Menambahkan HTML elements untuk sidebar
 sidebar_html = """
 <div class="menu-btn" onclick="toggleSidebar()">
@@ -316,7 +363,7 @@ font_awesome = """
 """
 
 # Menggabungkan semua HTML elements
-map.get_root().html.add_child(folium.Element(font_awesome + custom_css + custom_js + sidebar_html))
+map.get_root().html.add_child(folium.Element(font_awesome + custom_css + custom_js + home_list_buttons_html + sidebar_html))
 
 # Menambahkan layer control
 LayerControl().add_to(map)
