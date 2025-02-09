@@ -371,4 +371,4 @@ output_file = "list.html"
 with open(output_file, "w", encoding="utf-8") as file:
     file.write(html_content)
 
-print(f"File HTML telah disimpan di {output_file}")
+# print(f"File HTML telah disimpan di {output_file}")
